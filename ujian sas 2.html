@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ujian SAS</title>
+</head>
+<body>
+  <h1>Bismillah</h1>
+  <script>
+    let jumlahpembeli = parseInt(prompt("Masukkan jumlah pembeli:"));
+    let harga1buku = 5000;
+
+    let totalPendapatan = 0;
+    let totalBukuTerjual = 0;
+
+    let pembeliDiskonKecil = [];
+    let pembeliDiskonBesar = [];
+
+    for (let i = 1; i <= jumlahpembeli; i++) {
+      console.log(`======== Pembeli ke-${i} ========`);
+      let nama = prompt("Nama pembeli:");
+      let jumlahbukudibeli = parseInt(prompt("Jumlah buku yang dibeli:"));
+
+      let totalHarga = jumlahbukudibeli * harga1buku;
+      let totalBayar = 0;
+
+      if (jumlahbukudibeli < 100) {
+        totalBayar = totalHarga;
+      } else if (jumlahbukudibeli >= 100 && jumlahbukudibeli < 200) {
+        //diskonkecil//
+        let harga100 = 100 * harga1buku * 0.95;
+        let sisanya = (jumlahbukudibeli - 100) * harga1buku * 0.85;
+        totalBayar = harga100 + sisanya;
+        pembeliDiskonKecil.push(nama);
+      } else if (jumlahbukudibeli >= 200) {
+		//diskongede//
+        let harga100pertama = 100 * harga1buku * 0.93;
+        let harga100kedua = 100 * harga1buku * 0.83;
+        let sisanya = (jumlahbukudibeli - 200) * harga1buku * 0.73;
+        totalBayar = harga100pertama + harga100kedua + sisanya;
+        pembeliDiskonBesar.push(nama);
+      }
+
+      console.log(`Nama: ${nama}`);
+      console.log(`Jumlah buku: ${jumlahbukudibeli}`);
+      console.log(`Total harga sebelum diskon: Rp${totalHarga}`);
+      console.log(`Total bayar setelah diskon: Rp${totalBayar}`);
+      console.log("=============================");
+
+      totalPendapatan += totalBayar;
+    }
+
+    console.log("========== REKAPAN ==========");
+    console.log(`Total pendapatan: Rp${totalPendapatan}`);
+    console.log(`Pembeli yang mendapat diskon kecil: ${pembeliDiskonKecil.join(", ") || "Tidak ada"}`);
+    console.log(`Pembeli yang mendapat diskon besar: ${pembeliDiskonBesar.join(", ") || "Tidak ada"}`);
+    console.log("===============================");
+  </script>
+</body>
+</html>
